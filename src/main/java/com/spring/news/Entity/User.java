@@ -1,52 +1,43 @@
 package com.spring.news.Entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Entity
-@Table(name = "USERS")
+@Table(name = "IUSERS")
 public class User {
 
     @Id
     @Column(name = "USER_ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "c_generator")
+    @SequenceGenerator(name = "c_generator", sequenceName = "AUTO_INCREMENT_SEQUENCE", allocationSize = 1,initialValue = 7)
     private Integer id;
 
-    @Column(name = "USERNAME", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "ROLE_ID")
+    private Role role_id;
+
+    @Column(name = "USERNAME")
     private String username;
 
-    @Column(name = "PASSWORDD", nullable = false)
+    @Column(name = "PASSWORDD")
     private String password;
 
-    public User(int id, String username, String password) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-    }
+    @Column(name = "CODE")
+    private String code;
 
-    public User() {
+    @Column(name = "FULLNAME")
+    private String fullname;
 
-    }
+    @Column(name = "EMAIL")
+    private String email;
 
-    public int getId() {
-        return id;
-    }
+    @Column(name = "GENDER")
+    private Integer gender;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @Column(name = "STATUS")
+    private Integer status;
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

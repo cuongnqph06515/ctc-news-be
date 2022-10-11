@@ -42,8 +42,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Value("${security.oath2.scope-write}")
     private String SCOPE_WRITE;
 
-    private static final int ACCESS_TOKEN_VALIDITY_SECONDS = 1 * 60;
-    private static final int REFRESH_TOKEN_VALIDITY_SECONDS = 2 * 60;
+    private static final int ACCESS_TOKEN_VALIDITY_SECONDS = 1 * 60 *10;
+    private static final int REFRESH_TOKEN_VALIDITY_SECONDS = 2 * 60 *10;
 
     @Autowired
     private TokenStore tokenStore;

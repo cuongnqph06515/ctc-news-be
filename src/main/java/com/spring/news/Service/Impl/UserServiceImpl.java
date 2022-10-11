@@ -30,6 +30,21 @@ public class UserServiceImpl implements UserService ,UserDetailsService{
     }
 
     @Override
+    public void addUser(User user) {
+        userDao.addUser(user);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        userDao.updateUser(user);
+    }
+
+    @Override
+    public void deleteUser(int id) throws IllegalArgumentException{
+        userDao.deleteUser(id);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.getUserByUsername(username);
         if(user == null){
