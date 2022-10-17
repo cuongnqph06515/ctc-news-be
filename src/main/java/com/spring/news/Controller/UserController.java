@@ -1,5 +1,6 @@
 package com.spring.news.Controller;
 
+import com.spring.news.Entity.Sender;
 import com.spring.news.Entity.User;
 import com.spring.news.Service.UserService;
 import com.spring.news.helper.ApiResponse;
