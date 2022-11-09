@@ -10,16 +10,27 @@ import org.springframework.web.context.request.WebRequest;
 @RestControllerAdvice
 public class ApiExceptionHandler {
 
+    @ExceptionHandler(NullPointerException.class)
+    public ApiResponse NPException(NullPointerException ex, WebRequest webRequest){
+        return new ApiResponse(10001, ex.getLocalizedMessage());
+    }
+
+    @ExceptionHandler(NumberFormatException.class)
+    public ApiResponse NFException(NumberFormatException ex, WebRequest webRequest){
+        return new ApiResponse(10311, ex.getLocalizedMessage());
+    }
+
+    @ExceptionHandler(IndexOutOfBoundsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiResponse IOOBException(IndexOutOfBoundsException ex, WebRequest webRequest){
+        return new ApiResponse(10100, "ĐỐI TƯỢNG KHÔNG TỒN TẠI!");
+    }
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiResponse ISEException(Exception ex, WebRequest webRequest){
         return new ApiResponse(10000, ex.getLocalizedMessage());
     }
 
-    @ExceptionHandler(IndexOutOfBoundsException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiResponse IOOBException(Exception ex, WebRequest webRequest){
-        return new ApiResponse(101000, "ĐỐI TƯỢNG KHÔNG TỒN TẠI!");
-    }
 }
 

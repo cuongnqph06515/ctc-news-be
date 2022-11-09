@@ -42,8 +42,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Value("${security.oath2.scope-write}")
     private String SCOPE_WRITE;
 
-    private static final int ACCESS_TOKEN_VALIDITY_SECONDS = 1 * 60 *10;
-    private static final int REFRESH_TOKEN_VALIDITY_SECONDS = 2 * 60 *10;
+    private static final int ACCESS_TOKEN_VALIDITY_SECONDS = 5 * 60;
+    private static final int REFRESH_TOKEN_VALIDITY_SECONDS = 5 * 60;
 
     @Autowired
     private TokenStore tokenStore;
@@ -69,10 +69,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(tokenStore)
+        endpoints
                 .authenticationManager(authenticationManager)
                 .tokenEnhancer(tokenEnhancer());
-        endpoints.exceptionTranslator(exception -> {
+        endpoints.exceptionTranslator((exception) -> {
             if (exception instanceof OAuth2Exception) {
                 OAuth2Exception oAuth2Exception = (OAuth2Exception) exception;
                 return ResponseEntity.status(oAuth2Exception.getHttpErrorCode()).body(

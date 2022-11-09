@@ -2,51 +2,30 @@ package com.spring.news.Entity;
 
 import lombok.Data;
 
-import java.util.ArrayList;
+import javax.persistence.*;
 
-
+@Data
+@Entity
+@Table(name = "ISIDEBAR")
 public class Sidebar {
-    int id;
-    String name;
-    int parentId;
-    ArrayList<Sidebar> child;
+    @Id
+    @Column(name = "SIDEBAR_ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "c_generator")
+    @SequenceGenerator(name = "c_generator", sequenceName = "AUTO_INCREMENT_SEQUENCE", allocationSize = 1,initialValue = 7)
+    private Integer id;
 
-    public Sidebar(int id, String name, int parentId, ArrayList<Sidebar> child) {
-        this.id = id;
-        this.name = name;
-        this.parentId = parentId;
-        this.child = child;
-    }
+    @Column(name = "SIDEBAR_URL")
+    private String url;
 
-    public int getId() {
-        return id;
-    }
+    @Column(name = "ICON")
+    private String icon;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @Column(name = "SIDEBAR_NAME")
+    private String name;
 
-    public String getName() {
-        return name;
-    }
+    @Column(name = "TITLE")
+    private int title;
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(int parentId) {
-        this.parentId = parentId;
-    }
-
-    public ArrayList<Sidebar> getChild() {
-        return child;
-    }
-
-    public void setChild(ArrayList<Sidebar> child) {
-        this.child = child;
-    }
+    @Column(name = "PARENT_ID")
+    private int parentId;
 }

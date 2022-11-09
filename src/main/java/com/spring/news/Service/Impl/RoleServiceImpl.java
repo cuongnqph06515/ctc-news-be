@@ -3,6 +3,7 @@ package com.spring.news.Service.Impl;
 import com.spring.news.Dao.RoleDao;
 import com.spring.news.Entity.Category;
 import com.spring.news.Entity.Role;
+import com.spring.news.Entity.SidebarRole;
 import com.spring.news.Service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,14 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void deleteRole(Integer id) {
         roleDao.deleteById(id);
+    }
+
+    @Override
+    public List<SidebarRole> getListSidebarByRoleId(Integer role_id) {
+            List<SidebarRole> sibarList = roleDao.getListSidebarByRoleId(role_id);
+            if(sibarList == null || sibarList.isEmpty()){
+                throw new NullPointerException("Sidebar list is empty!");
+            }
+            return sibarList;
     }
 }

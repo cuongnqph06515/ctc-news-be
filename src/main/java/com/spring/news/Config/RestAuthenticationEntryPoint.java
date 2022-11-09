@@ -17,9 +17,8 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint{
 
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response,
-			AuthenticationException authException) throws IOException, ServletException {
+			AuthenticationException authException) throws IOException {
 		ApiResponse res = new ApiResponse(401, "Unauthorised");
-		res.setErrors(authException.getMessage());
 		res.setStatus(false);
         OutputStream out = response.getOutputStream();
         ObjectMapper mapper = new ObjectMapper();

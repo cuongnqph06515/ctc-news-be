@@ -1,5 +1,6 @@
 package com.spring.news.Controller;
 
+import com.spring.news.Entity.Nav;
 import com.spring.news.Entity.Sender;
 import com.spring.news.Entity.User;
 import com.spring.news.Service.UserService;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,6 +19,47 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    void getNavbar(ArrayList<Nav> lstNavbar, ArrayList<Nav> array){
+        ArrayList<Nav> fake = new ArrayList<>();
+        for(int i=0; i< lstNavbar.size(); i++){
+            ArrayList<Nav> lstFake = new ArrayList<>();
+            for(int j=0; j< array.size(); j++) {
+                if(lstNavbar.get(i).getId()==array.get(j).getParentId()) {
+                    lstFake.add(array.get(j));
+                }
+            }
+            if(lstFake.size()>0){
+                getNavbar(lstFake, array);
+                lstNavbar.get(i).setChild(lstFake);
+            }
+        }
+    }
+
+    @GetMapping("nav")
+    public ResponseEntity<ApiResponse> getNavbar() {
+
+        ArrayList<Nav> lstNav = new ArrayList<>();
+        lstNav.add(new Nav(1, "mot", 12,null));
+        lstNav.add(new Nav(2, "hai", 0,null));
+        lstNav.add(new Nav(3, "ba", 0,null));
+        lstNav.add(new Nav(4, "bon", 0,null));
+        lstNav.add(new Nav(5, "nam", 1,null));
+        lstNav.add(new Nav(6, "sau", 1,null));
+        lstNav.add(new Nav(7, "bay", 6,null));
+        lstNav.add(new Nav(8, "tam", 7,null));
+        lstNav.add(new Nav(9, "gg", 2,null));
+        lstNav.add(new Nav(10, "hg", 2,null));
+        lstNav.add(new Nav(11, "er", 2,null));
+        lstNav.add(new Nav(12, "ddf", 0,null));
+
+        UserController userController = new UserController();
+        userController.getNavbar(lstNav, lstNav);
+
+        ApiResponse object = new ApiResponse();
+        object.setData(lstNav);
+        return new ResponseEntity<ApiResponse>(object, HttpStatus.OK);
+    }
 
     @GetMapping("getAlls")
     public ResponseEntity<ApiResponse> getAllUsers() {

@@ -5,10 +5,6 @@ import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 
 @JsonSerialize(using = com.spring.news.Config.CustomOauthExceptionSerializer.class)
 public class CustomOauthException extends OAuth2Exception{
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
 	private int httpErrorCode;
 
 	public CustomOauthException(String msg) {

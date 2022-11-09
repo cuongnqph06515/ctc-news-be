@@ -1,4 +1,4 @@
-package com.javacore.algorithm;
+package com.spring.news.Entity;
 
 import java.util.ArrayList;
 

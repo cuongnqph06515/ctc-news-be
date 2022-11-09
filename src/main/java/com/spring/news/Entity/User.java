@@ -40,4 +40,7 @@ public class User {
     @Column(name = "STATUS")
     private Integer status;
 
+    public User(){
+
+    }
 }

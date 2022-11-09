@@ -12,7 +12,6 @@ public class CustomOauthExceptionSerializer extends StdSerializer<CustomOauthExc
 
 	protected CustomOauthExceptionSerializer() {
 		super(CustomOauthException.class);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

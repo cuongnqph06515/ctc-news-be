@@ -1,6 +1,7 @@
 package com.spring.news.Controller;
 
 import com.spring.news.Entity.Role;
+import com.spring.news.Entity.SidebarRole;
 import com.spring.news.Service.RoleService;
 import com.spring.news.helper.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,17 @@ public class RoleController {
     public ResponseEntity<ApiResponse> updateRole(@PathVariable(name = "id") Integer id){
         ApiResponse apiResponse = new ApiResponse();
         roleService.deleteRole(id);
+        return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.OK);
+    }
+    @GetMapping("getSidebarByRoleId/{role_id}")
+    public ResponseEntity<ApiResponse> getSidebarByRoleId(@PathVariable("role_id") Integer role_id){
+        ApiResponse apiResponse = new ApiResponse();
+        try {
+            List<SidebarRole> sidebarRoleList = roleService.getListSidebarByRoleId(role_id);
+            apiResponse.setData(sidebarRoleList);
+        }catch(NullPointerException ex){
+            apiResponse.setErrors(ex.getMessage());
+        }
         return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.OK);
     }
 }

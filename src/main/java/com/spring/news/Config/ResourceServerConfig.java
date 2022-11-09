@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 @Configuration
@@ -27,7 +28,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 	}
 
 	@Bean
-    RestAccessDeniedHandler accessDeniedHandler() {
+	AccessDeniedHandler accessDeniedHandler() {
 		return new RestAccessDeniedHandler();
 	}
 
@@ -38,11 +39,16 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.anonymous().disable()
-		.authorizeRequests()
-		.antMatchers("/").permitAll()
-		.and()
-		.exceptionHandling().accessDeniedHandler(accessDeniedHandler())
-		.authenticationEntryPoint(authenticationEntryPoint());
+		http
+				.anonymous().disable()
+				.authorizeRequests()
+//					.antMatchers("/user/**")
+//					.hasRole("ADMIN")
+					.anyRequest()
+					.authenticated()
+				.and()
+				.exceptionHandling()
+					.accessDeniedHandler(accessDeniedHandler())
+					.authenticationEntryPoint(authenticationEntryPoint());
 	}
 }
