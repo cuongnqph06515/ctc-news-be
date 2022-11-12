@@ -22,6 +22,9 @@ public class SenderController {
         ApiResponse apiResponse = new ApiResponse();
         List<Sender> senderList = senderService.getAllSender();
         apiResponse.setData(senderList);
+        apiResponse.setData(senderList);
+        apiResponse.setData(senderList);
+        apiResponse.setData(senderList);
         return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.OK);
     }
 

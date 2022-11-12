@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 @Component
-public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint{
+public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint{
 
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response,

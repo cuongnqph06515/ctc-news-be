@@ -33,6 +33,26 @@ public class UserController {
                 getNavbar(lstFake, array);
                 lstNavbar.get(i).setChild(lstFake);
             }
+            if(lstFake.size()>0){
+                getNavbar(lstFake, array);
+                lstNavbar.get(i).setChild(lstFake);
+            }
+            if(lstFake.size()>0){
+                getNavbar(lstFake, array);
+                lstNavbar.get(i).setChild(lstFake);
+            }
+            if(lstFake.size()>0){
+                getNavbar(lstFake, array);
+                lstNavbar.get(i).setChild(lstFake);
+            }
+            if(lstFake.size()>0){
+                getNavbar(lstFake, array);
+                lstNavbar.get(i).setChild(lstFake);
+            }
+            if(lstFake.size()>0){
+                getNavbar(lstFake, array);
+                lstNavbar.get(i).setChild(lstFake);
+            }
         }
     }
 
