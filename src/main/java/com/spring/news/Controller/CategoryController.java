@@ -24,7 +24,7 @@ public class CategoryController {
         List<Category> categoryList = categoryService.getAllCategory();
         apiResponse.setData(categoryList);
         System.out.println("1");
-        System.out.println("2");
+        System.out.println("mater update");
         System.out.println("3");
         return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.OK);
     }
