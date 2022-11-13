@@ -25,7 +25,9 @@ public class CategoryController {
         apiResponse.setData(categoryList);
         System.out.println("1");
         System.out.println("master 2");
+        System.out.println("master 3");
         System.out.println("cuongnguyen2");
+        System.out.println("cuongnguyen3");
         return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.OK);
     }
 
