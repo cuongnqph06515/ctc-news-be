@@ -23,9 +23,6 @@ public class CategoryController {
         ApiResponse apiResponse = new ApiResponse();
         List<Category> categoryList = categoryService.getAllCategory();
         apiResponse.setData(categoryList);
-        System.out.println("1");
-        System.out.println("2 master");
-        System.out.println("cuongnguyen1 update");
         return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.OK);
     }
 
