@@ -24,17 +24,17 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 
 	@Bean
 	public AuthenticationFailureHandler authenticationFailureHandler() {
-		return new RestAuthenticationFailureHandler();
+		return new CustomAuthenticationFailureHandler();
 	}
 
 	@Bean
 	AccessDeniedHandler accessDeniedHandler() {
-		return new RestAccessDeniedHandler();
+		return new CustomAccessDeniedHandler();
 	}
 
 	@Bean
-	RestAuthenticationEntryPoint authenticationEntryPoint() {
-		return new RestAuthenticationEntryPoint();
+	CustomAuthenticationEntryPoint authenticationEntryPoint() {
+		return new CustomAuthenticationEntryPoint();
 	}
 
 	@Override
