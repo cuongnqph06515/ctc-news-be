@@ -21,7 +21,6 @@ public class UserController {
     UserService userService;
 
     void getNavbar(ArrayList<Nav> lstNavbar, ArrayList<Nav> array){
-        ArrayList<Nav> fake = new ArrayList<>();
         for(int i=0; i< lstNavbar.size(); i++){
             ArrayList<Nav> lstFake = new ArrayList<>();
             for(int j=0; j< array.size(); j++) {
@@ -34,6 +33,18 @@ public class UserController {
                 lstNavbar.get(i).setChild(lstFake);
             }
         }
+    }
+
+    public ArrayList<Nav> lamPhang(ArrayList<Nav> lstNavbar, ArrayList<Nav> lstNew){
+        for(int i=0; i< lstNavbar.size(); i++){
+            Nav nav = new Nav(lstNavbar.get(i).getId(), lstNavbar.get(i).getName(),
+                    lstNavbar.get(i).getParentId(),null);
+            lstNew.add(nav);
+            if(lstNavbar.get(i).getChild() != null){
+                lamPhang(lstNavbar.get(i).getChild(), lstNew);
+            }
+        }
+        return lstNew;
     }
 
     @GetMapping("nav")
@@ -53,9 +64,9 @@ public class UserController {
         lstNav.add(new Nav(11, "er", 2,null));
         lstNav.add(new Nav(12, "ddf", 0,null));
 
-        UserController userController = new UserController();
-        userController.getNavbar(lstNav, lstNav);
+        getNavbar(lstNav, lstNav);
 
+        lstNav = lamPhang(lstNav, new ArrayList<>());
         ApiResponse object = new ApiResponse();
         object.setData(lstNav);
         return new ResponseEntity<ApiResponse>(object, HttpStatus.OK);
