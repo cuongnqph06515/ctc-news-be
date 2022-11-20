@@ -20,7 +20,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
         String hql = "FROM User";
-        List<User> userList = entityManager.createQuery(hql).getResultList();
+        Query query = entityManager.createQuery(hql);
+        List<User> userList = query.getResultList();
         if (userList != null && userList.size() > 0){
             return userList;
         }
@@ -30,7 +31,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUserByUsername(String username) {
         String hql = "FROM User where username= :username";
-        Query query = entityManager.createQuery(hql).setParameter("username", username);
+        Query query = entityManager.createQuery(hql);
+        query.setParameter("username", username);
         List<User> userList = query.getResultList();
         if (userList != null && userList.size() > 0){
             return userList.get(0);
